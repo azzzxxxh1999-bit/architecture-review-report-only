@@ -83,10 +83,19 @@ DEFAULT_EXCLUDES = [
 
 
 def iter_files(root, patterns, excludes):
+    root = os.path.abspath(root)
     seen = set()
     for pat in patterns:
         for p in glob.glob(os.path.join(root, pat), recursive=True):
             if not os.path.isfile(p):
+                continue
+            # Keep symlinks from expanding an audit module outside its root.
+            real_root = os.path.realpath(root)
+            real_path = os.path.realpath(p)
+            try:
+                if os.path.commonpath((real_root, real_path)) != real_root:
+                    continue
+            except ValueError:
                 continue
             rp = os.path.relpath(p, root).replace("\\", "/")
             low = "/" + rp.lower()

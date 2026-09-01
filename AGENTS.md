@@ -20,6 +20,8 @@ architecture-review skill.
   may generate the conclusion dashboard and open it in the browser.
 - The dashboard is beginner-facing: show only the architecture score, three confirmed
   problems and three likely follow-on problems. It has no repair plans or AI handoff.
+- `client/` is an optional Plus connector only. It uploads allow-listed audit metadata,
+  never Plus core files or source code, and invokes the user's own local Agent.
 
 The free copy owns its read-only renderer and module-map projection; users must
 explicitly request it instead of the default Plus workflow.

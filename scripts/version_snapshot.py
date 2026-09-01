@@ -89,7 +89,6 @@ def snapshot_fingerprint(entries):
 
 def collect_source_snapshot(root, previous=None, exact_excludes=None):
     root = os.path.realpath(root)
-    previous_by_path = {e["path"]: e for e in (previous or {}).get("files", [])}
     exact_excludes = {normalize_rel(p) for p in (exact_excludes or set())}
     entries = []
     sensitive_skipped = []
@@ -115,11 +114,9 @@ def collect_source_snapshot(root, previous=None, exact_excludes=None):
                 continue
             try:
                 st = os.stat(full)
-                old = previous_by_path.get(rel)
-                if old and old.get("size") == st.st_size and old.get("mtimeNs") == st.st_mtime_ns:
-                    digest = old["sha256"]
-                else:
-                    digest = sha256_file(full)
+                # Hash content on every snapshot. Size and mtime can be preserved
+                # by copies/restores, so they cannot prove that content is unchanged.
+                digest = sha256_file(full)
                 entries.append({
                     "path": rel,
                     "size": st.st_size,

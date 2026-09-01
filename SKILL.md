@@ -40,6 +40,9 @@ features, and localized fixes stay outside this skill.
 
 单模块修复不触发本 Skill，且本 Skill 不调用规划器、执行器或任何本机 Agent。
 
+`client/plus_client.py` 是独立的可选 Plus 连接器，不属于免费审计流程；它不会上传源码，
+也不会携带 Plus Skill、方案算法或服务端密钥。
+
 For a triggered website/game review:
 
 1. Run `scripts/version.py status --root <project>`.

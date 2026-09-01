@@ -42,11 +42,11 @@ def load_contract(state_path):
 
 def grade_bounds(contract):
     ordered = sorted(contract.rubric, key=lambda item: item[1], reverse=True)
-    bounds = {"A": 101}
+    # Each grade uses the previous grade's lower bound as its exclusive upper
+    # bound, so the lowest grade is selectable too.
+    bounds = {}
     for index, (grade, _) in enumerate(ordered):
-        if index + 1 < len(ordered):
-            bounds[ordered[index + 1][0]] = ordered[index][1]
-    bounds.setdefault("F", 0)
+        bounds[grade] = 101 if index == 0 else ordered[index - 1][1]
     return bounds
 
 

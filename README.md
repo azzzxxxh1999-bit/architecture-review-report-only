@@ -11,6 +11,11 @@ while the Chinese dashboard opens the free module map. The four-lens shell and
 eight-dimension evidence screen are omitted; module search, filters, details, and
 dependency highlighting remain. It has no repair plan or bridge.
 
+## Plus 连接器（可选）
+
+`client/plus_client.py` 不包含 Plus 核心 Skill。它只上传本机审计摘要，接收授权任务，
+并调用用户自己的本地 Agent 修复；源码始终留在本机。
+
 ## Quick start
 
 \`\`\`text

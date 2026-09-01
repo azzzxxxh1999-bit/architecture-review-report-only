@@ -1,0 +1,7 @@
+interface:
+  display_name: "架构审查 Skill（免费开源版）"
+  short_description: "显式免费只读架构审计、中文仪表盘与模块图"
+  default_prompt: "Use $architecture-review-report-only only when the user explicitly requests the free read-only edition: audit this project's architecture, independently score its modules, generate the Chinese dashboard and module map, and open them."
+
+policy:
+  allow_implicit_invocation: false
